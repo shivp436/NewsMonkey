@@ -1,0 +1,56 @@
+import { Component } from 'react';
+import { Link } from 'react-router-dom';
+
+interface NewsItemProps {
+  title: string | null;
+  description: string | null;
+  imageUrl?: string;
+  newsUrl?: string;
+  publishedAt?: string;
+  author?: string;
+}
+
+export class NewsItem extends Component<NewsItemProps> {
+  defaultImageURI: string =
+    'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbiographywiki.net%2Fwp-content%2Fuploads%2F2019%2F09%2Findian-bollywood-actor-ayushmann-khurrana-vicky-donor-male-debut.jpg&f=1&nofb=1&ipt=a54febe8bb45b01a071ad5e40e8ca2d04209e8198c9a2b93a074796617f6c4a8&ipo=images';
+
+  static defaultProps = {
+    newsUrl: 'https://biographywiki.net/ayushmann-khurrana/',
+    imageUrl:
+      'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbiographywiki.net%2Fwp-content%2Fuploads%2F2019%2F09%2Findian-bollywood-actor-ayushmann-khurrana-vicky-donor-male-debut.jpg&f=1&nofb=1&ipt=a54febe8bb45b01a071ad5e40e8ca2d04209e8198c9a2b93a074796617f6c4a8&ipo=images',
+    title: 'This is a default title',
+    description: 'This is a default description',
+  };
+
+  render() {
+    let { title, description, imageUrl, newsUrl, author, publishedAt } = this.props;
+    return (
+      <div className='my-3'>
+        <div className='card'>
+          <img src={imageUrl? imageUrl: this.defaultImageURI} className='card-img-top' alt='...' />
+          <div className='card-body'>
+            <h5 className='card-title'>{title ? title.slice(0, 40) : ''}</h5>
+            <p className='card-text'>
+              {description ? description.slice(0, 80) : ''}
+            </p>
+            <p className='card-text'>
+              <small className='text-muted'>
+                By {author ? author : 'Unknown'} <br/>
+                At {publishedAt ? new Date(publishedAt).toLocaleString() : 'XX-XX-XXXX'}
+              </small>
+            </p>
+            <Link
+              to={newsUrl ? newsUrl : this.defaultImageURI}
+              target='_blank'
+              className='btn btn-sm btn-dark'
+            >
+              Read More
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default NewsItem;
