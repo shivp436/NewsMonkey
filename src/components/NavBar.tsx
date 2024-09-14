@@ -26,12 +26,36 @@ export class NavBar extends Component {
               id='navbarSupportedContent'
             >
               <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-                <li className="nav-item"><Link to="/" className="nav-link">General</Link></li>
-                <li className="nav-item"><Link to="/sports" className="nav-link">Sports</Link></li>
-                <li className="nav-item"><Link to="/science" className="nav-link">Science</Link></li>
-                <li className="nav-item"><Link to="/business" className="nav-link">Business</Link></li>
-                <li className="nav-item"><Link to="/health" className="nav-link">Health</Link></li>
-                <li className="nav-item"><Link to="/technology" className="nav-link">Technology</Link></li>
+                <li className='nav-item'>
+                  <Link to='/' className='nav-link'>
+                    General
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link to='/sports' className='nav-link'>
+                    Sports
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link to='/science' className='nav-link'>
+                    Science
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link to='/business' className='nav-link'>
+                    Business
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link to='/health' className='nav-link'>
+                    Health
+                  </Link>
+                </li>
+                <li className='nav-item'>
+                  <Link to='/technology' className='nav-link'>
+                    Technology
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>

@@ -44,7 +44,7 @@ class News extends Component<NewsProps, NewsState> {
   fetchArticles = () => {
     const { page } = this.state;
     const { pageSize, category, country } = this.props;
-    let url = `https://newsapi.org/v2/top-headlines?country=${
+    const url = `https://newsapi.org/v2/top-headlines?country=${
       country || 'us'
     }&category=${category || 'general'}&apiKey=${this.apiKey}&page=${page}&pageSize=${pageSize}`;
     this.setState({ loading: true });
@@ -72,7 +72,7 @@ class News extends Component<NewsProps, NewsState> {
     }
 
     const { pageSize, category, country } = this.props;
-    let url = `https://newsapi.org/v2/top-headlines?country=${
+    const url = `https://newsapi.org/v2/top-headlines?country=${
       country || 'us'
     }&category=${category || 'general'}&apiKey=${this.apiKey}&page=${page + 1}&pageSize=${pageSize}`;
     // this.setState({ loading: true });
@@ -93,7 +93,7 @@ class News extends Component<NewsProps, NewsState> {
 
   render() {
     const { articles, loading, totalResults } = this.state;
-    let articleLength = articles ? articles.length : 0;
+    const articleLength = articles ? articles.length : 0;
 
     return (
       <div className='container my-3'>
@@ -104,12 +104,12 @@ class News extends Component<NewsProps, NewsState> {
             : 'General'}{' '}
           News
         </h1>
-        {loading && <Spinner />}  {/* Initial load spinner */}
+        {loading && <Spinner />} {/* Initial load spinner */}
         <InfiniteScroll
           pageStart={0}
           loadMore={this.fetchMoreArticles}
           hasMore={articleLength < totalResults}
-          loader={<Spinner key={0}/>}
+          loader={<Spinner key={0} />}
         >
           <div className='row'>
             {articles && articles.length > 0

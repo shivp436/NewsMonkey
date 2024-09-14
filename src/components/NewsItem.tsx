@@ -23,11 +23,16 @@ export class NewsItem extends Component<NewsItemProps> {
   };
 
   render() {
-    let { title, description, imageUrl, newsUrl, author, publishedAt } = this.props;
+    const { title, description, imageUrl, newsUrl, author, publishedAt } =
+      this.props;
     return (
       <div className='my-3'>
         <div className='card'>
-          <img src={imageUrl? imageUrl: this.defaultImageURI} className='card-img-top' alt='...' />
+          <img
+            src={imageUrl ? imageUrl : this.defaultImageURI}
+            className='card-img-top'
+            alt='...'
+          />
           <div className='card-body'>
             <h5 className='card-title'>{title ? title.slice(0, 40) : ''}</h5>
             <p className='card-text'>
@@ -35,8 +40,11 @@ export class NewsItem extends Component<NewsItemProps> {
             </p>
             <p className='card-text'>
               <small className='text-muted'>
-                By {author ? author : 'Unknown'} <br/>
-                At {publishedAt ? new Date(publishedAt).toLocaleString() : 'XX-XX-XXXX'}
+                By {author ? author : 'Unknown'} <br />
+                At{' '}
+                {publishedAt
+                  ? new Date(publishedAt).toLocaleString()
+                  : 'XX-XX-XXXX'}
               </small>
             </p>
             <Link
