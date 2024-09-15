@@ -10,14 +10,14 @@ interface NewsItemProps {
   author?: string;
 }
 
-export class NewsItem extends Component<NewsItemProps> {
+class NewsItem extends Component<NewsItemProps> {
   defaultImageURI: string =
-    'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbiographywiki.net%2Fwp-content%2Fuploads%2F2019%2F09%2Findian-bollywood-actor-ayushmann-khurrana-vicky-donor-male-debut.jpg&f=1&nofb=1&ipt=a54febe8bb45b01a071ad5e40e8ca2d04209e8198c9a2b93a074796617f6c4a8&ipo=images';
+    'https://images.pexels.com/photos/68744/loggerhead-turtle-sea-ocean-water-68744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1';
 
   static defaultProps = {
     newsUrl: 'https://biographywiki.net/ayushmann-khurrana/',
     imageUrl:
-      'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbiographywiki.net%2Fwp-content%2Fuploads%2F2019%2F09%2Findian-bollywood-actor-ayushmann-khurrana-vicky-donor-male-debut.jpg&f=1&nofb=1&ipt=a54febe8bb45b01a071ad5e40e8ca2d04209e8198c9a2b93a074796617f6c4a8&ipo=images',
+      'https://images.pexels.com/photos/68744/loggerhead-turtle-sea-ocean-water-68744.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     title: 'This is a default title',
     description: 'This is a default description',
   };

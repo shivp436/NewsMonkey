@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: path.resolve(__dirname, '..', './src/index.tsx'),
@@ -29,7 +30,7 @@ module.exports = {
       {
         test: /\.(?:ico|png|svg|jpg|jpeg|gif|ttf)$/i,
         type: 'asset/resource',
-      }
+      },
     ],
   },
   output: {
@@ -44,15 +45,18 @@ module.exports = {
     // this code is for copying the assets folder to the build folder
     // it allows us to use direct paths of the assets in the code
     // otherwise we have to use the require method to import the assets
-    // always use the require method to import the assets, 
+    // always use the require method to import the assets,
     // it will be better for the performance
     new CopyWebpackPlugin({
-			patterns: [
-				{ 
+      patterns: [
+        {
           from: path.resolve(__dirname, '..', './src/assets'),
-          to: 'assets' 
+          to: 'assets',
         },
-			],
-		}),
+      ],
+    }),
+    new Dotenv({
+      path: './.env.local',
+    }),
   ],
-}
+};

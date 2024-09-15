@@ -1,11 +1,17 @@
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-export class NavBar extends Component {
+interface NavBarProps {
+  categories: string[];
+}
+
+class NavBar extends Component<NavBarProps> {
   render() {
+    const { categories } = this.props;
+
     return (
       <div>
-        <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
+        <nav className='navbar fixed-top navbar-expand-lg navbar-dark bg-dark'>
           <div className='container-fluid'>
             <Link className='navbar-brand' to='/'>
               NewsMonkey
@@ -26,36 +32,16 @@ export class NavBar extends Component {
               id='navbarSupportedContent'
             >
               <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-                <li className='nav-item'>
-                  <Link to='/' className='nav-link'>
-                    General
-                  </Link>
-                </li>
-                <li className='nav-item'>
-                  <Link to='/sports' className='nav-link'>
-                    Sports
-                  </Link>
-                </li>
-                <li className='nav-item'>
-                  <Link to='/science' className='nav-link'>
-                    Science
-                  </Link>
-                </li>
-                <li className='nav-item'>
-                  <Link to='/business' className='nav-link'>
-                    Business
-                  </Link>
-                </li>
-                <li className='nav-item'>
-                  <Link to='/health' className='nav-link'>
-                    Health
-                  </Link>
-                </li>
-                <li className='nav-item'>
-                  <Link to='/technology' className='nav-link'>
-                    Technology
-                  </Link>
-                </li>
+                {categories.map((category) => (
+                  <li className='nav-item' key={category}>
+                    <Link
+                      to={category === 'general' ? '/' : `/${category}`}
+                      className='nav-link'
+                    >
+                      {category.charAt(0).toUpperCase() + category.slice(1)}{' '}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

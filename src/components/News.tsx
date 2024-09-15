@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import NewsItem from './NewsItem'; // Assuming you have a NewsItem component
 import Spinner from './Spinner'; // Assuming you have a Spinner component
@@ -23,10 +23,13 @@ type NewsProps = {
   pageSize: number;
   category?: string;
   country?: string;
+  setProgress: (progress: number) => void;
+  apiKey: string;
 };
 
 class News extends Component<NewsProps, NewsState> {
-  apiKey: string = 'afb0959ee3f944bdbdd669570d5ddbc3';
+  apiKey = this.props.apiKey;
+
   constructor(props: NewsProps) {
     super(props);
     this.state = {
@@ -41,26 +44,26 @@ class News extends Component<NewsProps, NewsState> {
     this.fetchArticles();
   }
 
-  fetchArticles = () => {
+  fetchArticles = async () => {
     const { page } = this.state;
-    const { pageSize, category, country } = this.props;
+    const { pageSize, category, country, setProgress } = this.props;
+    setProgress(0);
     const url = `https://newsapi.org/v2/top-headlines?country=${
       country || 'us'
     }&category=${category || 'general'}&apiKey=${this.apiKey}&page=${page}&pageSize=${pageSize}`;
+    setProgress(10);
     this.setState({ loading: true });
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({
-          articles: data.articles,
-          totalResults: data.totalResults,
-          loading: false,
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-        this.setState({ loading: false });
-      });
+    setProgress(30);
+    const response = await fetch(url);
+    setProgress(60);
+    const data = await response.json();
+    setProgress(90);
+    this.setState({
+      articles: data.articles,
+      totalResults: data.totalResults,
+      loading: false,
+    });
+    setProgress(100);
   };
 
   fetchMoreArticles = () => {
@@ -85,8 +88,7 @@ class News extends Component<NewsProps, NewsState> {
           loading: false,
         }));
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
         this.setState({ loading: false });
       });
   };
@@ -97,7 +99,7 @@ class News extends Component<NewsProps, NewsState> {
 
     return (
       <div className='container my-3'>
-        <h1 className='h1 text-center'>
+        <h1 className='h1 text-center' style={{ marginTop: '80px' }}>
           NewsMonkey -{' '}
           {this.props.category
             ? this.capitalizeFirstLetter(this.props.category)
